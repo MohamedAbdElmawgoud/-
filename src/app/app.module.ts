@@ -14,16 +14,16 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
+  entryComponents: [],  
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule
   ,    IonicStorageModule.forRoot(),
-  LocalNotifications
   
   ],
   providers: [
     StatusBar,
     SplashScreen,
     GetDataService,
+    LocalNotifications,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
