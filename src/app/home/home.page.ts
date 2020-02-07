@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { GetDataService, Singelton } from 'src/app/admin/get-data.service';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 import { pages } from '../pages';
 
 @Component({
@@ -38,11 +38,13 @@ notification(){
   this.After_1_hour = new Date(today);
   this.localNotifications.schedule({
     id: 1,
-    title:'Reminder',
     text: "Reminder you about a thing",
-    firstAt: this.After_1_hour,
-    every: "hour" // "minute", "hour", "week", "month", "year
-    
+    data : {},
+    trigger : {
+      every : ELocalNotificationTriggerUnit.HOUR,
+      in : 1 ,
+      firstAt : new Date()
+    }
   });
  
 }
