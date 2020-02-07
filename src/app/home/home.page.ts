@@ -10,25 +10,37 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  
+  After_1_hour: any;
+
   tempHades: any=[];
 hadeses: any = [];
   hades: any = [];
+  oneHourLater = new Date();
+  
 
   constructor(private localNotifications: LocalNotifications,private router :Router , public storage: GetDataService ) {
 
     const had = new Singelton();
     this.hades = had.saveHades();
     this.tempHades = this.hades;
+    
   }
-
-  // this.localNotifications.schedule({
-  //   id: 1,
-  //   text: 'Single ILocalNotification',
-  //   sound: isAndroid? 'file://sound.mp3': 'file://beep.caf',
-  //   data: { secret: key }
-  // });
-
+notification(){
+  this.oneHourLater.setHours(this.oneHourLater.getHours() + 1)
+  let today = new Date();
+  today.setHours(1);
+  today.setMinutes(0);
+  today.setSeconds(0);
+  this.After_1_hour = new Date(today);
+  this.localNotifications.schedule({
+    id: 1,
+    title:'Reminder',
+    text: "Reminder you about a thing",
+    firstAt: this.After_1_hour,
+    every: "hour" // "minute", "hour", "week", "month", "year"
+  });
+ 
+}
   getHades(type) {
     this.storage.getAllHades(type, this.tempHades).then((n) => {
       this.hades = n;
@@ -45,11 +57,11 @@ hadeses: any = [];
   saveHades(title, content, type) {
     let data = { tit: title, con: content, ta: type };
     this.hadeses.push(data);
-    // console.log(this.stories);
+    
     this.storage.saveHades(data.tit, data.con, data.ta);
   }
   ngOnInit() {
-    // horror
+    this.notification();
 
     this.saveHades(this.hades[0].tit, this.hades[0].con, this.hades[0].ta);
   
