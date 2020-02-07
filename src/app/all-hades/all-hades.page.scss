@@ -1,0 +1,21 @@
+@import '../../theme/fonts';
+
+ion-content ,.hades ,div{
+    --background: linear-gradient(to top, #101D2B, #294A65)0% 0%/100% 40% no-repeat ,white 0% 100%/100% 60% no-repeat;
+    
+}
+ion-card{
+    margin-top:10%; 
+}
+ 
+ 
+ ion-card-title{
+     color: #FFFFFF;
+     font-size: 40px;
+     font-family:   "hartala";
+     font-style: bold;
+     margin-top: 7px;
+     text-align:center; 
+     
+    
+ }

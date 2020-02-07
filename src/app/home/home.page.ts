@@ -11,7 +11,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 })
 export class HomePage {
   
-  tempHades: any;
+  tempHades: any=[];
 hadeses: any = [];
   hades: any = [];
 
@@ -33,10 +33,10 @@ hadeses: any = [];
     this.storage.getAllHades(type, this.tempHades).then((n) => {
       this.hades = n;
       // console.log(this.hades);
-      let route = this.router.config.find(r => r.path === 'view-hades');
+      let route = this.router.config.find(r => r.path === 'all-hades');
       route.data = this.hades;
       // console.log(this.tempHades);
-      this.router.navigate(['view-hades', { hades: this.tempHades }]);
+      this.router.navigate(['all-hades', { hades: this.tempHades }]);
       return this.hades;
     });
   }

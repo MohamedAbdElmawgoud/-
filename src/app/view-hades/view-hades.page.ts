@@ -23,9 +23,8 @@ export class ViewHadesPage implements OnInit {
     let temp = Object.keys(this.hadeses);
     for (count of temp) {
       this.Temp.push(this.hadeses[count]);
-      this.Temp = this.Temp[0];
     }
-    console.log(this.Temp);
+      console.log(this.Temp);
   }
 
 }

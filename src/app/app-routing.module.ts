@@ -8,6 +8,10 @@ const routes: Routes = [
     path: 'view-hades' ,  data: {hades : ''},
     loadChildren: () => import('./view-hades/view-hades.module').then( m => m.ViewHadesPageModule)
   },
+  {
+    path: 'all-hades',
+    loadChildren: () => import('./all-hades/all-hades.module').then( m => m.AllHadesPageModule)
+  },
 ];
 
 @NgModule({
