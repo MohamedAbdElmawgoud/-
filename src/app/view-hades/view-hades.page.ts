@@ -14,16 +14,12 @@ export class ViewHadesPage implements OnInit {
   constructor(private router: Router, private route: ActivatedRoute,) { }
 
   ngOnInit() {
-    this.hades = this.route
-      .data
-      .subscribe(v => {
-        this.hadeses = v;
+   this.route
+      .paramMap
+      .subscribe(data => {
+        this.hadeses = data.get('text');
       });
-    let count: any;
-    let temp = Object.keys(this.hadeses);
-    for (count of temp) {
-      this.Temp.push(this.hadeses[count]);
-    }
+
       console.log(this.Temp);
   }
 
