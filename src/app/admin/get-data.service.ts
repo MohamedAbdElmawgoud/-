@@ -1,14 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Observable } from "rxjs";
+import { Config } from "@ionic/angular/dist";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GetDataService {
+  config: Config;
+  configUrl: any; // The ConfigService fetches this file with a get() method on HttpClient.
+  
   hades: any = [];
 
-  constructor(public storage: Storage) { }
+  constructor(public storage: Storage,private http: HttpClient) { }
 
+  getConfig() {
+    return this.http.get(this.configUrl);
+  }
+
+  getConfigResponse(): Observable<HttpResponse<Config>> {
+    return this.http.get<Config>(
+      this.configUrl, { observe: 'response' });
+  }
+
+
+  
 saveHades(title, content, type) {
     
         const data = { tit: title, con: content, ta: type };
