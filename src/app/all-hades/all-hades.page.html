@@ -1,15 +1,22 @@
 
-<ion-content (click)="toggleInfiniteScroll()">
-  <div class="hades" >
+<ion-content   [scrollEvents]="true"
+(ionScroll)="loadData($event)"  >
+  <div  class="hades" >
 
     <h2>
       {{hades}}
     </h2>
+    <ion-infinite-scroll  >
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more data...">
+        <ion-item lines="none" class="home-headers" color="transparent" *ngFor="let item of hadeses " (click)="gethades(item.text)" >
+          <span style="font-size: 14px;" > 
+            {{item.text?.slice(0 , 160) }} 
+          </span>
+        </ion-item>
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
-   <ion-item lines="none" class="home-headers" color="transparent" *ngFor="let item of hadeses " (click)="gethades(item.text)" >
-    <span style="font-size: 14px;" > 
-      {{item.text.slice(0 , 160) }} 
-    </span>
-  </ion-item>
    </div> 
 </ion-content>

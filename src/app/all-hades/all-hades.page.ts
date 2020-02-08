@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GetDataService, Singelton } from 'src/app/admin/get-data.service';
 import { pages } from '../pages';
@@ -12,10 +12,13 @@ import { IonInfiniteScroll } from '@ionic/angular';
   styleUrls: ['./all-hades.page.scss'],
 })
 export class AllHadesPage implements OnInit {
-  infiniteScroll: any;
+  @ViewChild(IonInfiniteScroll, { static: true }) infiniteScroll: IonInfiniteScroll;
+  page = 1
 
   Temp: any = [];
   hadeses: any = [];
+  allHadeses: any = [];
+
   hades;
 
   constructor(private router: Router,
@@ -24,7 +27,7 @@ export class AllHadesPage implements OnInit {
     private cdr: ChangeDetectorRef,
     protected getDataService: GetDataService,
     private admobFree: AdMobFree,
-    public platform: Platform
+    public platform: Platform,
   ) { }
 
   ngOnInit() {
@@ -35,50 +38,51 @@ export class AllHadesPage implements OnInit {
         this.cdr.detectChanges()
         this.getDataService.configUrl = pages[this.hades][0]
         let res = await this.getDataService.getConfigResponse().toPromise();
-        this.hadeses = res.body;
+        this.allHadeses = res.body;
+
+        this.hadeses = [...this.hadeses, ...this.allHadeses.splice(0, 50)]
+
       });
+
+
+  }
+  loadData(e) {
+    if ((e.detail.scrollTop / this.hadeses.length) / this.hadeses.length * 2 > this.page) {
+
+      this.hadeses = [...this.hadeses, ...this.allHadeses.splice(0, 50)]
+
+
+      this.page++;
+
+    }
+
+
 
 
   }
 
   ionViewWillEnter() {
-    if(this.platform.is('cordova')){
-    const bannerConfig: AdMobFreeBannerConfig = {
-      id :'ca-app-pub-7155090574313106/5706569080' ,
-      // for the sake of this example we will just use the test config
-      isTesting: false,
-      autoShow: true,
-     };
-     this.admobFree.banner.config(bannerConfig);
-     
-     this.admobFree.banner.prepare() .then(() => {
-    // banner Ad is ready
-    // if we set autoShow to false, then we will need to call the show method here
-  })
-  .catch(e => console.log(e));
-  
+    if (this.platform.is('cordova')) {
+      const bannerConfig: AdMobFreeBannerConfig = {
+        id: 'ca-app-pub-7155090574313106/5706569080',
+        // for the sake of this example we will just use the test config
+        isTesting: false,
+        autoShow: true,
+      };
+      this.admobFree.banner.config(bannerConfig);
+
+      this.admobFree.banner.prepare().then(() => {
+        // banner Ad is ready
+        // if we set autoShow to false, then we will need to call the show method here
+      })
+        .catch(e => console.log(e));
+
     }
   }
 
-// infite scroll code 
-  loadData(event) {
-    setTimeout(() => {
-      console.log('Done');
-      event.target.complete();
-
-      // App logic to determine if all data is loaded
-      // and disable the infinite scroll
-
-       //error becouse data not defined 
-       
-      // if (data.length == 1000) {
-      //   event.target.disabled = true;
-      // }
-    }, 500);
-  }
 
   toggleInfiniteScroll() {
-    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+
   }
 
 
@@ -87,10 +91,10 @@ export class AllHadesPage implements OnInit {
 
 
 
-  
+
   gethades(text: string) {
 
-      this.router.navigate(['view-hades', { text : text}]);
+    this.router.navigate(['view-hades', { text: text }]);
 
 
   }
