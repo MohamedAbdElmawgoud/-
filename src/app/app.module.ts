@@ -12,6 +12,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { GetDataService } from 'src/app/admin/get-data.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { HttpClientModule } from '@angular/common/http';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     SplashScreen,
     GetDataService,
     LocalNotifications,
+    AdMobFree,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

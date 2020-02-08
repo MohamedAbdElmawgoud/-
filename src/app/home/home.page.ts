@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { GetDataService ,Singelton } from 'src/app/admin/get-data.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 
 @Component({
   selector: 'app-home',
