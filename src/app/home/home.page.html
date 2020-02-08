@@ -1,11 +1,14 @@
 
 
 <ion-content>
-    <ion-card (click)="getHades('مسلم')">
-        <ion-card-header>
-          
-          <ion-card-title class="firstTitle">ابو هريره</ion-card-title>
-        </ion-card-header>
-    </ion-card>
-        
+  <h2>
+    كتب الصحاح
+
+  </h2>
+
+    <ion-item lines="none" class="home-headers" color="transparent" *ngFor="let page of pages" (click)="getHades(page)" >
+      <ion-label>
+        {{page}}
+      </ion-label>
+    </ion-item>
 </ion-content>

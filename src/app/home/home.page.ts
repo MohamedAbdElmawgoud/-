@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { GetDataService ,Singelton } from 'src/app/admin/get-data.service';
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+
+
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
+import { GetDataService, Singelton } from 'src/app/admin/get-data.service';
+import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
+import { pages } from '../pages';
+import { Platform } from "@ionic/angular";
 
 @Component({
   selector: 'app-home',
@@ -11,15 +15,18 @@ import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+
+  tempHades: any = [];
+  hadeses: any = [];
+  hades: any = [];
+  pages = []
   After_1_hour: any;
 
-  tempHades: any=[];
-hadeses: any = [];
-  hades: any = [];
+
   oneHourLater = new Date();
   
 
-  constructor(private localNotifications: LocalNotifications,private router :Router , public storage: GetDataService ) {
+  constructor(private admobFree: AdMobFree,public platform: Platform,private localNotifications: LocalNotifications, private router: Router, public storage: GetDataService) {
 
     const had = new Singelton();
     this.hades = had.saveHades();
@@ -35,36 +42,45 @@ notification(){
   this.After_1_hour = new Date(today);
   this.localNotifications.schedule({
     id: 1,
-    title:'Reminder',
     text: "Reminder you about a thing",
-    firstAt: this.After_1_hour,
-    every: "hour" // "minute", "hour", "week", "month", "year"
+    data : {},
+    trigger : {
+      every : ELocalNotificationTriggerUnit.HOUR,
+      in : 1 ,
+      firstAt : new Date()
+    }
   });
  
 }
+
+ionViewWillEnter() {
+  if(this.platform.is('cordova')){
+  const bannerConfig: AdMobFreeBannerConfig = {
+    id :'ca-app-pub-7155090574313106/2425799629' ,
+    // for the sake of this example we will just use the test config
+    isTesting: false,
+    autoShow: true,
+   };
+   this.admobFree.banner.config(bannerConfig);
+   
+   this.admobFree.banner.prepare() .then(() => {
+  // banner Ad is ready
+  // if we set autoShow to false, then we will need to call the show method here
+})
+.catch(e => console.log(e));
+
+  }
+}
   getHades(type) {
-    this.storage.getAllHades(type, this.tempHades).then((n) => {
-      this.hades = n;
-      // console.log(this.hades);
-      let route = this.router.config.find(r => r.path === 'all-hades');
-      route.data = this.hades;
-      // console.log(this.tempHades);
-      this.router.navigate(['all-hades', { hades: this.tempHades }]);
-      return this.hades;
-    });
+ 
+      this.router.navigate(['all-hades', { hades: type }]);
+
   }
 
 
-  saveHades(title, content, type) {
-    let data = { tit: title, con: content, ta: type };
-    this.hadeses.push(data);
-    
-    this.storage.saveHades(data.tit, data.con, data.ta);
-  }
   ngOnInit() {
+    this.pages = Object.keys(pages)
     this.notification();
 
-    this.saveHades(this.hades[0].tit, this.hades[0].con, this.hades[0].ta);
-  
   }
 }

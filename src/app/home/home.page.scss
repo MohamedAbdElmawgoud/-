@@ -1,12 +1,27 @@
+@import '../../theme/fonts';
 
-ion-content{
-    --background:url('../../assets/img/backG.jpg') 0 0/100% 100% no-repeat;
+ion-content ,.hades ,div{
+    --background: linear-gradient(to bottom left, #09121B, #060D15, #060D15, #162633, #0D1E28, #242B3D, #212C39, #183243, #0B2530, rgba(11, 33, 56, 0.83), rgb(12, 40, 51), #11232F)0% 0%/100% 100% no-repeat ;
+    
 }
-ion-card-title{
-    color: #FFFFFF;
-    margin-left:8%;
-   
+ion-card{
+    margin-top:10%; 
 }
-.firstTitle{
-    margin-top:15px;
+ 
+ 
+ ion-card-title{
+     color: #FFFFFF;
+     font-size: 40px;
+     font-family:   "hartala";
+     font-style: bold;
+     margin-top: 7px;
+     text-align:center; 
+     
+    
+ }
+h2{
+    text-align: center;
+    font-size: 2rem;
+    padding-bottom: 30px;
+    color: #FFFFFF;;
 }

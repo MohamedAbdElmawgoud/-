@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GetDataService ,Singelton } from 'src/app/admin/get-data.service';
+import { GetDataService, Singelton } from 'src/app/admin/get-data.service';
+import { pages } from '../pages';
+import { Platform } from "@ionic/angular";
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
+import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
   selector: 'app-all-hades',
@@ -8,39 +12,87 @@ import { GetDataService ,Singelton } from 'src/app/admin/get-data.service';
   styleUrls: ['./all-hades.page.scss'],
 })
 export class AllHadesPage implements OnInit {
-  Temp: any= [];
-  hadeses: any = [];
-  hades: any = [];
+  infiniteScroll: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, public storage: GetDataService) { }
+  Temp: any = [];
+  hadeses: any = [];
+  hades;
+
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    public storage: GetDataService,
+    private cdr: ChangeDetectorRef,
+    protected getDataService: GetDataService,
+    private admobFree: AdMobFree,
+    public platform: Platform
+  ) { }
 
   ngOnInit() {
-    this.hades = this.route
-      .data
-      .subscribe(v => {
-        this.hadeses = v;
+    this.route
+      .paramMap
+      .subscribe(async  data => {
+        this.hades = data.get('hades');
+        this.cdr.detectChanges()
+        this.getDataService.configUrl = pages[this.hades][0]
+        let res = await this.getDataService.getConfigResponse().toPromise();
+        this.hadeses = res.body;
       });
-    let count: any;
-    let temp = Object.keys(this.hadeses);
-    for (count of temp) {
-      this.Temp.push(this.hadeses[count]);
-      this.Temp = this.Temp[0];
-    }
-    count = this.Temp.tit;
-   // console.log(this.Temp);
-  }
-  
-  gethades(title: string) {
-    this.storage.gethades(title).then((n) => {
-      this.hades = n;
-      // console.log(this.hades);
-      let route = this.router.config.find(r => r.path === 'view-hades');
-      route.data = this.hades;
-      this.router.navigate(['view-hades', { note: this.hades }]);
-     // console.log(this.hades);
-      return this.hades;
-    });
-    // console.log(this.hades);
+
 
   }
+
+  ionViewWillEnter() {
+    if(this.platform.is('cordova')){
+    const bannerConfig: AdMobFreeBannerConfig = {
+      id :'ca-app-pub-7155090574313106/5706569080' ,
+      // for the sake of this example we will just use the test config
+      isTesting: false,
+      autoShow: true,
+     };
+     this.admobFree.banner.config(bannerConfig);
+     
+     this.admobFree.banner.prepare() .then(() => {
+    // banner Ad is ready
+    // if we set autoShow to false, then we will need to call the show method here
+  })
+  .catch(e => console.log(e));
+  
+    }
+  }
+
+// infite scroll code 
+  loadData(event) {
+    setTimeout(() => {
+      console.log('Done');
+      event.target.complete();
+
+      // App logic to determine if all data is loaded
+      // and disable the infinite scroll
+
+       //error becouse data not defined 
+       
+      // if (data.length == 1000) {
+      //   event.target.disabled = true;
+      // }
+    }, 500);
+  }
+
+  toggleInfiniteScroll() {
+    this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
+  }
+
+
+
+
+
+
+
+  
+  gethades(text: string) {
+
+      this.router.navigate(['view-hades', { text : text}]);
+
+
+  }
+
 }

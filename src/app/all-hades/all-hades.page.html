@@ -1,12 +1,15 @@
 
-<!-- *ngFor="let hades of Temp; let i = index" -->
-<ion-content>
-  <div class="hades">
+<ion-content (click)="toggleInfiniteScroll()">
+  <div class="hades" >
 
-    
-   <ion-card  class="hadesC" (click)="gethades(Temp.tit)">
-       <ion-card-title class="hadesT">{{Temp.tit}}</ion-card-title> 
-   </ion-card>
-   
+    <h2>
+      {{hades}}
+    </h2>
+
+   <ion-item lines="none" class="home-headers" color="transparent" *ngFor="let item of hadeses " (click)="gethades(item.text)" >
+    <span style="font-size: 14px;" > 
+      {{item.text.slice(0 , 160) }} 
+    </span>
+  </ion-item>
    </div> 
 </ion-content>
