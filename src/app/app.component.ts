@@ -4,6 +4,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform , IonRouterOutlet, AlertController  } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public alertController: AlertController,
+    private localNotifications: LocalNotifications
     
   ) {
     this.initializeApp();
@@ -46,7 +48,23 @@ export class AppComponent {
     });
   }
 
-
+  notification(){
+    let today = new Date();
+    today.setHours(1);
+    today.setMinutes(0);
+    today.setSeconds(0);
+    this.localNotifications.schedule({
+      id: 1,
+      text: "Reminder you about a thing",
+      data : {},
+      trigger : {
+        every : ELocalNotificationTriggerUnit.MINUTE,
+        in : 1 ,
+        firstAt : new Date()
+      }
+    });
+   
+  }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
       header: 'Confirm!',

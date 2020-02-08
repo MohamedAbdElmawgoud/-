@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
 
 
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
@@ -26,32 +27,16 @@ export class HomePage {
   oneHourLater = new Date();
   
 
-  constructor(private admobFree: AdMobFree,public platform: Platform,private localNotifications: LocalNotifications, private router: Router, public storage: GetDataService) {
+  constructor(private admobFree: AdMobFree,public platform: Platform, private router: Router, public storage: GetDataService ,
+    private nativePageTransitions: NativePageTransitions
+    ) {
 
     const had = new Singelton();
     this.hades = had.saveHades();
     this.tempHades = this.hades;
     
   }
-notification(){
-  this.oneHourLater.setHours(this.oneHourLater.getHours() + 1)
-  let today = new Date();
-  today.setHours(1);
-  today.setMinutes(0);
-  today.setSeconds(0);
-  this.After_1_hour = new Date(today);
-  this.localNotifications.schedule({
-    id: 1,
-    text: "Reminder you about a thing",
-    data : {},
-    trigger : {
-      every : ELocalNotificationTriggerUnit.HOUR,
-      in : 1 ,
-      firstAt : new Date()
-    }
-  });
- 
-}
+
 
 ionViewWillEnter() {
   if(this.platform.is('cordova')){
@@ -80,7 +65,24 @@ ionViewWillEnter() {
 
   ngOnInit() {
     this.pages = Object.keys(pages)
-    this.notification();
 
   }
+  ionViewWillLeave() {
+
+    let options: NativeTransitionOptions = {
+       direction: 'up',
+       duration: 500,
+       slowdownfactor: 3,
+       slidePixels: 20,
+       iosdelay: 100,
+       androiddelay: 150,
+       fixedPixelsTop: 0,
+       fixedPixelsBottom: 60
+      }
+   
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+   
+   }
 }

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AllHadesPageRoutingModule } from './all-hades-routing.module';
 
 import { AllHadesPage } from './all-hades.page';
+import { NativePageTransitions } from '@ionic-native/native-page-transitions/ngx';
 
 @NgModule({
   imports: [
@@ -15,6 +16,10 @@ import { AllHadesPage } from './all-hades.page';
     IonicModule,
     AllHadesPageRoutingModule
   ],
-  declarations: [AllHadesPage]
+  declarations: [AllHadesPage],
+  providers : [
+    NativePageTransitions,
+
+  ]
 })
 export class AllHadesPageModule {}

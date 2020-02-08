@@ -5,6 +5,7 @@ import { pages } from '../pages';
 import { Platform } from "@ionic/angular";
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/native-page-transitions/ngx';
 
 @Component({
   selector: 'app-all-hades',
@@ -28,6 +29,8 @@ export class AllHadesPage implements OnInit {
     protected getDataService: GetDataService,
     private admobFree: AdMobFree,
     public platform: Platform,
+    private nativePageTransitions: NativePageTransitions
+
   ) { }
 
   ngOnInit() {
@@ -98,5 +101,23 @@ export class AllHadesPage implements OnInit {
 
 
   }
+  ionViewWillLeave() {
+
+    let options: NativeTransitionOptions = {
+       direction: 'up',
+       duration: 500,
+       slowdownfactor: 3,
+       slidePixels: 20,
+       iosdelay: 100,
+       androiddelay: 150,
+       fixedPixelsTop: 0,
+       fixedPixelsBottom: 60
+      }
+   
+    this.nativePageTransitions.slide(options)
+      .then()
+      .catch();
+   
+   }
 
 }
