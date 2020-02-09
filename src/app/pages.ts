@@ -25,8 +25,5 @@ export const pages = {
     ],
     "سنن ابن ماجه" : [
         "https://api.npoint.io/c8b9d7ba4fed23180495"
-    ],
-    "سُنن ابن ماجه" : [
-        "https://api.npoint.io/f333e4f964f783729dee"
     ]
 }

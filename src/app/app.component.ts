@@ -68,7 +68,7 @@ export class AppComponent {
         text : "test"
       },
       trigger : {
-        every : ELocalNotificationTriggerUnit.MINUTE,
+        every : ELocalNotificationTriggerUnit.HOUR,
         in : 1 ,
       },
       actions : []
