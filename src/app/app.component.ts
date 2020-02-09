@@ -63,7 +63,6 @@ export class AppComponent {
       id: 1,
       text: "Reminder you about a thing",
       lockscreen : true,
-      foreground : true,
       data : {
         text : "test"
       },
