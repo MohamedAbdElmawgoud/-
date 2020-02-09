@@ -23,7 +23,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     public alertController: AlertController,
     private localNotifications: LocalNotifications,
-    private backgroundMode: BackgroundMode
+    private backgroundMode: BackgroundMode,
+
     
   ) {
     this.initializeApp();
@@ -35,6 +36,10 @@ export class AppComponent {
       this.splashScreen.hide();
       this.backgroundMode.enable();
       this.notification()
+      this.localNotifications.on('click' ).subscribe((notification )=>{
+        this.router.navigate(['view-hades', { text: notification.data.text }])
+
+      })
     });
   }
 
@@ -57,11 +62,16 @@ export class AppComponent {
     this.localNotifications.schedule({
       id: 1,
       text: "Reminder you about a thing",
-      data : {},
+      lockscreen : true,
+      foreground : true,
+      data : {
+        text : "test"
+      },
       trigger : {
         every : ELocalNotificationTriggerUnit.MINUTE,
         in : 1 ,
-      }
+      },
+      actions : []
     });
    
   }
