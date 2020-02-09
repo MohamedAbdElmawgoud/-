@@ -13,6 +13,7 @@ import { GetDataService } from 'src/app/admin/get-data.service';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +28,8 @@ import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
     GetDataService,
     LocalNotifications,
     AdMobFree,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    BackgroundMode
   ],
   bootstrap: [AppComponent]
 })

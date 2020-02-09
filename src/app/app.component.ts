@@ -5,6 +5,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform , IonRouterOutlet, AlertController  } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public alertController: AlertController,
-    private localNotifications: LocalNotifications
+    private localNotifications: LocalNotifications,
+    private backgroundMode: BackgroundMode
     
   ) {
     this.initializeApp();
@@ -31,6 +33,8 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.backgroundMode.enable();
+      this.notification()
     });
   }
 
@@ -49,10 +53,7 @@ export class AppComponent {
   }
 
   notification(){
-    let today = new Date();
-    today.setHours(1);
-    today.setMinutes(0);
-    today.setSeconds(0);
+
     this.localNotifications.schedule({
       id: 1,
       text: "Reminder you about a thing",
@@ -60,7 +61,6 @@ export class AppComponent {
       trigger : {
         every : ELocalNotificationTriggerUnit.MINUTE,
         in : 1 ,
-        firstAt : new Date()
       }
     });
    
