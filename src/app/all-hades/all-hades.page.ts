@@ -43,7 +43,7 @@ export class AllHadesPage implements OnInit {
         let res = await this.getDataService.getConfigResponse().toPromise();
         this.allHadeses = res.body;
 
-        this.hadeses = [...this.hadeses, ...this.allHadeses.splice(0, 50)]
+        this.hadeses = [...this.hadeses, ...this.allHadeses.splice(0, 20)]
 
       });
 
