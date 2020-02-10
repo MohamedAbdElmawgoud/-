@@ -20,6 +20,7 @@
         "@angular/platform-browser-dynamic": "~8.1.2",
         "@angular/router": "~8.1.2",
         "@ionic-native/admob-free": "^5.21.0",
+        "@ionic-native/android-permissions": "^5.21.3",
         "@ionic-native/background-mode": "^5.21.2",
         "@ionic-native/core": "^5.0.0",
         "@ionic-native/local-notifications": "^5.20.0",
@@ -34,6 +35,7 @@
         "cordova": "^9.0.0",
         "cordova-android": "^8.1.0",
         "cordova-plugin-admob-free": "^0.27.0",
+        "cordova-plugin-android-permissions": "^1.0.2",
         "cordova-plugin-background-mode": "^0.7.3",
         "cordova-plugin-local-notification": "^0.9.0-beta.2",
         "cordova-sqlite-storage": "^4.0.0",
@@ -91,7 +93,11 @@
             "cordova-plugin-ionic-webview": {},
             "cordova-plugin-ionic-keyboard": {},
             "cordova-plugin-background-mode": {},
-            "com.telerik.plugins.nativepagetransitions": {}
-        }
+            "com.telerik.plugins.nativepagetransitions": {},
+            "cordova-plugin-android-permissions": {}
+        },
+        "platforms": [
+            "android"
+        ]
     }
 }

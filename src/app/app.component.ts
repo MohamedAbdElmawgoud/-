@@ -2,12 +2,12 @@ import { Component, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Platform , IonRouterOutlet, AlertController  } from '@ionic/angular';
+import { Platform, IonRouterOutlet, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
-import { async } from '@angular/core/testing';
 import { GetDataService } from './admin/get-data.service';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 @Component({
   selector: 'app-root',
@@ -15,32 +15,34 @@ import { GetDataService } from './admin/get-data.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
-  backButtonSubscription:  any;
+  backButtonSubscription: any;
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
-  
+
   constructor(
     private platform: Platform,
-    public router: Router,    
+    public router: Router,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public alertController: AlertController,
     private localNotifications: LocalNotifications,
     private backgroundMode: BackgroundMode,
-    private getDataService  :GetDataService
+    private getDataService: GetDataService,
+    private androidPermissions: AndroidPermissions
 
-    
+
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
-    this.platform.ready().then(  () => {
+    this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.backgroundMode.enable();
+      this.askForPermissions()
       this.notification()
-      this.localNotifications.on('click' ).subscribe( async ( notification )=>{
-        let hades =  await this.getDataService.randomHades()
+      this.localNotifications.on('click').subscribe(async (notification) => {
+        let hades = await this.getDataService.randomHades()
         this.router.navigate(['view-hades', hades])
 
       })
@@ -60,23 +62,28 @@ export class AppComponent {
       });
     });
   }
+  askForPermissions() {
+    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.FOREGROUND_SERVICE).then(
+      result => console.log('Has permission?', result.hasPermission),
+      err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.FOREGROUND_SERVICE)
+    );
+  }
+  notification() {
 
-  notification(){
-    
     this.localNotifications.schedule({
       id: 1,
       text: "رسول الله يقول لك ...",
-      lockscreen : true,
-      data : {
-        text : "test"
+      lockscreen: true,
+      data: {
+        text: "test"
       },
-      trigger : {
-        every : ELocalNotificationTriggerUnit.HOUR,
-        in : 1 ,
+      trigger: {
+        every: ELocalNotificationTriggerUnit.HOUR,
+        in: 1,
       },
-      actions : []
+      actions: []
     });
-   
+
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({

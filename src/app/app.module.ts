@@ -14,6 +14,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +30,8 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
     LocalNotifications,
     AdMobFree,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    BackgroundMode
+    BackgroundMode,
+    AndroidPermissions
   ],
   bootstrap: [AppComponent]
 })
