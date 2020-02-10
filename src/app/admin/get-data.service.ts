@@ -26,16 +26,119 @@ export class GetDataService {
 
 
   
-saveHades(title, content, type) {
+async saveHades(hadeses, type) {
     
-        const data = { tit: title, con: content, ta: type };
-        // console.log(data);
-        this.hades.push(data);
+       
+       // this.hades = hadeses;
         // console.log(this.hades);
-        // if you want push new data change the statement 
-        if (this.storage == null) {
-          this.storage.set('Hades', this.hades);
-        }
+        //     "موطأ الإمام مالك" 
+
+
+        if(type=="https://api.npoint.io/ae1334a31d62c7f9fa61" && await this.storage.get('malek')==null) {
+          this.hades = hadeses;
+        this.storage.set('malek', this.hades);
+          console.log(this.hades);
+        
+      }      
+
+// "مسند احمد ابن حنبل"
+
+
+if(type=="https://api.npoint.io/66f908e1fcd0bae217c1" && await this.storage.get('Ahmed')==null) {
+  this.hades = hadeses;
+         this.storage.set('Ahmed', this.hades);
+           console.log(this.hades);
+         
+       }   
+       
+       //
+
+       //     "صحيح البخاري"
+
+
+       if(type== "https://api.npoint.io/40ee131ca1c64b0b335c" && await this.storage.get('bo5ary')==null) {
+        this.hades = hadeses;
+               this.storage.set('bo5ary', this.hades);
+                 console.log(this.hades);
+               
+             }      
+       
+       // صحيح مسلم"
+       
+       
+       if(type=="https://api.npoint.io/4203f11d80f7dd414ded" && await this.storage.get('muslim')==null) {
+        this.hades = hadeses;
+                this.storage.set('muslim', this.hades);
+                  console.log(this.hades);
+                
+              }   
+              
+              //
+
+
+              //     "سنن أبي داود"
+
+
+        if(type=="https://api.npoint.io/9c744b55c6e59c405a1b" && await this.storage.get('Dawwd')==null) {
+          this.hades = hadeses;
+                 this.storage.set('Dawwd', this.hades);
+                   console.log(this.hades);
+                 
+               }      
+         
+         // "سنن الدارمي"
+         
+         
+         if(type=="https://api.npoint.io/df27514cf9a8cc1d59a8" && await this.storage.get('Dramy')==null) {
+          this.hades = hadeses;
+                  this.storage.set('Dramy', this.hades);
+                    console.log(this.hades);
+                  
+                }   
+                
+                //
+
+
+
+
+                //     "سنن الترمذي" 
+
+
+        if(type=="https://api.npoint.io/b5883fdbe0187940cd46" && await this.storage.get('termazi')==null) {
+          this.hades = hadeses;
+                 this.storage.set('termazi', this.hades);
+                   console.log(this.hades);
+                 
+               }      
+         
+         // "سنن ابن ماجه"
+         
+         
+         if(type=="https://api.npoint.io/c8b9d7ba4fed23180495" && await this.storage.get('maga')==null) {
+          this.hades = hadeses;
+                  this.storage.set('maga', this.hades);
+                    console.log(this.hades);
+                  
+                }   
+                
+                //
+
+
+
+                //     "سُنن ابن ماجه"
+
+
+        if(type=="https://api.npoint.io/f333e4f964f783729dee" && await this.storage.get('abn maga')==null) {
+          this.hades = hadeses;
+                 this.storage.set('abn maga', this.hades);
+                   console.log(this.hades);
+                 
+               }      
+         
+    
+
+      
+
         return this.hades;
       }
 
@@ -88,17 +191,8 @@ export class Singelton {
     return Singelton.instance;
   }
 
-  saveHades(){
-      let data = {
-        tit: 'ابو هريره'
-        // data = { tit: 'title', con: 'aaacontent', ta: 'horror' };
-        // this.hades.push(data);
-        // tslint:disable-next-line:max-line-length
-         ,con: `عن أبي هريرة -رضي الله عنه- قال: إنَّ رجلًا قال للنبيِّ -صلَّى اللهُ عليه وسلَّم-: أَوصِني، قال: لا تَغضَبْ، فردَّد مِرارًا، قال: لا تَغضَبْ
-         
-         `
-        , ta: 'مسلم'
-      };
+  saveHades(data){
+  
       this.hades.push(data);
       return this.hades;
   }

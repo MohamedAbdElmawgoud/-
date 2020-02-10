@@ -31,9 +31,9 @@ export class HomePage {
     private nativePageTransitions: NativePageTransitions
     ) {
 
-    const had = new Singelton();
-    this.hades = had.saveHades();
-    this.tempHades = this.hades;
+    // const had = new Singelton();
+    // this.hades = had.saveHades();
+    // this.tempHades = this.hades;
     
   }
 
