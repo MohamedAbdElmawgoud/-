@@ -16,6 +16,7 @@ ion-card-content{
      animation-name: slideInUp;
      animation-duration:  0.6s;
      text-align: center;
+     
    }
  
  @keyframes slideInUp{
@@ -46,6 +47,8 @@ ion-card-content{
   height: 100%;
   top: 10px;
   left: 0;
+  top: 12%;
+
 }
 
  p{
@@ -59,7 +62,7 @@ ion-card-content{
  }
 
  div {
-  height: 71%;
+  height: 60%;
   font-size: 20px;
 
   /* position: absolute; */
