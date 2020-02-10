@@ -12,6 +12,7 @@ export class ViewHadesPage implements OnInit {
   Temp: any=[];
   hadeses: any=[];
   hades: any =[];
+  frameHeight ;
 
   constructor(private admobFree: AdMobFree,public platform: Platform,private router: Router, private route: ActivatedRoute,) { }
 
@@ -21,10 +22,11 @@ export class ViewHadesPage implements OnInit {
       .subscribe(data => {
         this.hadeses = data.get('text');
       });
-
-      console.log(this.Temp);
+      this.frameHeight = window.outerHeight;
+      console.log(this.frameHeight);
   }
   ionViewWillEnter() {
+
     if(this.platform.is('cordova')){
     const bannerConfig: AdMobFreeBannerConfig = {
       id :'ca-app-pub-7155090574313106/9002622742' ,
@@ -33,7 +35,8 @@ export class ViewHadesPage implements OnInit {
       autoShow: true,
      };
      this.admobFree.banner.config(bannerConfig);
-     
+ 
+    
      this.admobFree.banner.prepare() .then(() => {
     // banner Ad is ready
     // if we set autoShow to false, then we will need to call the show method here

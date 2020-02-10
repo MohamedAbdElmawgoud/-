@@ -41,6 +41,12 @@ ion-card-content{
      
     
  }
+ ion-card-content{
+  position: fixed;
+  height: 100%;
+  top: 10px;
+  left: 0;
+}
 
  p{
   padding: 55px;
@@ -50,4 +56,12 @@ ion-card-content{
   height: 100%;
   text-align: right;
   font-size: 17px;
+ }
+
+ div {
+  height: 71%;
+  font-size: 20px;
+
+  /* position: absolute; */
+  overflow-y: scroll;
  }

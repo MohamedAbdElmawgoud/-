@@ -53,7 +53,8 @@ export class AllHadesPage implements OnInit {
 
   }
   loadData(e) {
-    if ((e.detail.scrollTop / this.hadeses.length) / this.hadeses.length * 2 > this.page) {
+
+    if (((e.detail.scrollTop + 500) / 110) / this.hadeses.length > 1) {
 
       this.hadeses = [...this.hadeses, ...this.allHadeses.splice(0, 50)]
 
@@ -106,21 +107,6 @@ export class AllHadesPage implements OnInit {
   }
   ionViewWillLeave() {
 
-    let options: NativeTransitionOptions = {
-       direction: 'up',
-       duration: 500,
-       slowdownfactor: 3,
-       slidePixels: 20,
-       iosdelay: 100,
-       androiddelay: 150,
-       fixedPixelsTop: 0,
-       fixedPixelsBottom: 60
-      }
-   
-    this.nativePageTransitions.slide(options)
-      .then()
-      .catch();
-   
-   }
+  }
 
 }

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "122361741857",
+    "firebase_url": "https://ahades.firebaseio.com",
+    "project_id": "ahades",
+    "storage_bucket": "ahades.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122361741857:android:161372d7efbe7ed3bf1960",
+        "android_client_info": {
+          "package_name": "com.knowladge.hadeas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "122361741857-am8ni89j7mvena834pp687vg3t1ckscp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIx5Z5uIuUMVxA9xsSAC0oPbJffO4hAJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "122361741857-am8ni89j7mvena834pp687vg3t1ckscp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
