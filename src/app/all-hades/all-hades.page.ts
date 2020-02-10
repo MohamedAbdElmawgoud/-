@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, ViewChild, Renderer2 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GetDataService, Singelton } from 'src/app/admin/get-data.service';
+import { GetDataService } from 'src/app/admin/get-data.service';
 import { pages } from '../pages';
 import { Platform } from "@ionic/angular";
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
@@ -41,18 +41,10 @@ export class AllHadesPage implements OnInit {
         this.hades = data.get('hades');
         this.cdr.detectChanges()
         this.getDataService.configUrl = pages[this.hades][0]
-        let res = await this.getDataService.getConfigResponse(pages[this.hades][0]);
-        this.getDataService.getConfig(res.url);
-        if (res.body !=null) {
-        this.allHadeses = res.body;
-        }
-        else {
-          this.allHadeses = res
-        }
-        this.type = res.url
+        
+        let res = await this.getDataService.getData(pages[this.hades][0]);
+        this.allHadeses = res
         this.hadeses = [...this.hadeses, ...this.allHadeses.splice(0, 100)]
-       this.storage.saveHades(this.allHadeses,this.type); // b3t kol al ahades
-      // console.log(res);
 
       });
 
