@@ -5,8 +5,7 @@ import { NativePageTransitions, NativeTransitionOptions } from '@ionic-native/na
 
 
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
-import { GetDataService, Singelton } from 'src/app/admin/get-data.service';
-import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
+import { GetDataService } from 'src/app/admin/get-data.service';
 import { pages } from '../pages';
 import { Platform } from "@ionic/angular";
 
