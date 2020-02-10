@@ -40,6 +40,14 @@ export class GetDataService {
     }
   }
 
+   async randomHades()  {
+     let storageItems =  await this.storage.keys()
+    let hadeses = await this.storage.get(storageItems[Math.floor(Math.random() * storageItems.length)])
+
+    
+    return hadeses[Math.floor(Math.random() * hadeses.length)]
+  }
+
 
 
 

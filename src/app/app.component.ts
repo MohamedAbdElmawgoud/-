@@ -6,6 +6,8 @@ import { Platform , IonRouterOutlet, AlertController  } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+import { async } from '@angular/core/testing';
+import { GetDataService } from './admin/get-data.service';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +26,7 @@ export class AppComponent {
     public alertController: AlertController,
     private localNotifications: LocalNotifications,
     private backgroundMode: BackgroundMode,
+    private getDataService  :GetDataService
 
     
   ) {
@@ -31,13 +34,14 @@ export class AppComponent {
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    this.platform.ready().then(  () => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.backgroundMode.enable();
       this.notification()
-      this.localNotifications.on('click' ).subscribe((notification )=>{
-        this.router.navigate(['view-hades', { text: notification.data.text }])
+      this.localNotifications.on('click' ).subscribe( async ( notification )=>{
+        let hades =  await this.getDataService.randomHades()
+        this.router.navigate(['view-hades', hades])
 
       })
     });
@@ -58,10 +62,10 @@ export class AppComponent {
   }
 
   notification(){
-
+    
     this.localNotifications.schedule({
       id: 1,
-      text: "Reminder you about a thing",
+      text: "رسول الله يقول لك ...",
       lockscreen : true,
       data : {
         text : "test"
