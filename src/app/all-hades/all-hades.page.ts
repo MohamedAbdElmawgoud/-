@@ -41,12 +41,18 @@ export class AllHadesPage implements OnInit {
         this.hades = data.get('hades');
         this.cdr.detectChanges()
         this.getDataService.configUrl = pages[this.hades][0]
-        let res = await this.getDataService.getConfigResponse().toPromise();
+        let res = await this.getDataService.getConfigResponse(pages[this.hades][0]);
+        this.getDataService.getConfig(res.url);
+        if (res.body !=null) {
         this.allHadeses = res.body;
+        }
+        else {
+          this.allHadeses = res
+        }
         this.type = res.url
         this.hadeses = [...this.hadeses, ...this.allHadeses.splice(0, 100)]
        this.storage.saveHades(this.allHadeses,this.type); // b3t kol al ahades
-       console.log(res);
+      // console.log(res);
 
       });
 
