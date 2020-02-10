@@ -1,11 +1,13 @@
 
 <ion-content   [scrollEvents]="true"
 (ionScroll)="loadData($event)"  >
-  <div  class="hades" >
+<ion-spinner *ngIf="!hadeses[0]" ></ion-spinner>
 
-    <h2>
-      {{hades}}
-    </h2>
+<h2>
+  {{hades}}
+</h2>
+  <div *ngIf="hadeses[0]"  class="hades" >
+
     <ion-infinite-scroll  >
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"
@@ -19,4 +21,5 @@
     </ion-infinite-scroll>
 
    </div> 
+
 </ion-content>

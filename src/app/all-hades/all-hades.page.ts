@@ -44,7 +44,8 @@ export class AllHadesPage implements OnInit {
         
         let res = await this.getDataService.getData(pages[this.hades][0]);
         this.allHadeses = res
-        this.hadeses = [...this.hadeses, ...this.allHadeses.splice(0, 100)]
+          this.hadeses = [...this.hadeses, ...this.allHadeses.splice(0, 100)]
+
 
       });
 
