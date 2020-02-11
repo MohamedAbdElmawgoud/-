@@ -1,15 +1,13 @@
 import { Component, ViewChildren, QueryList, OnDestroy } from '@angular/core';
 
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform, IonRouterOutlet, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { GetDataService } from './admin/get-data.service';
-import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
-import { timer } from 'rxjs';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -17,20 +15,17 @@ import { timer } from 'rxjs';
 })
 export class AppComponent {
   backButtonSubscription: any;
-  showSplash = true;
   
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
 
   constructor(
     private platform: Platform,
     public router: Router,
-    private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public alertController: AlertController,
     private localNotifications: LocalNotifications,
     private backgroundMode: BackgroundMode,
     private getDataService: GetDataService,
-    private androidPermissions: AndroidPermissions
 
 
   ) {
@@ -41,11 +36,9 @@ export class AppComponent {
     
     this.platform.ready().then(  () => {
       this.statusBar.styleDefault();
-      this.splashScreen.hide();
       this.backButtonEvent();
       this.backgroundMode.enable();
       this.notification();
-      timer(3000).subscribe(() => this.showSplash = false);
       this.localNotifications.on('click' ).subscribe( async ( notification )=>{
         let hades =  await this.getDataService.randomHades()
         this.router.navigate(['view-hades', hades])
@@ -55,12 +48,7 @@ export class AppComponent {
   }
 
 
-  playAudio(){
-    let audio = new Audio();
-    audio.src = "../../assets/نغمة للجوال صلي على محمد ﷺ.mp3";
-    audio.load();
-    audio.play();
-  }
+
   backButtonEvent() {
     this.backButtonSubscription = this.platform.backButton.subscribe(() => {
       this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
@@ -74,15 +62,9 @@ export class AppComponent {
       });
     });
   }
-  askForPermissions() {
-    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.FOREGROUND_SERVICE).then(
-      result => console.log('Has permission?', result.hasPermission),
-      err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.FOREGROUND_SERVICE)
-    );
-  }
+
 
   notification(){
-    this.playAudio();
     this.localNotifications.schedule({
       id: 1,
       text: "قال رسول الله ﷺ ...",

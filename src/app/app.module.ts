@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
@@ -14,7 +13,6 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
-import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,13 +23,11 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
   ],
   providers: [
     StatusBar,
-    SplashScreen,
     GetDataService,
     LocalNotifications,
     AdMobFree,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     BackgroundMode,
-    AndroidPermissions
   ],
   bootstrap: [AppComponent]
 })
