@@ -9,6 +9,7 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { GetDataService } from './admin/get-data.service';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
+import { timer } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -16,6 +17,8 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 })
 export class AppComponent {
   backButtonSubscription: any;
+  showSplash = true;
+  
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
 
   constructor(
@@ -35,20 +38,29 @@ export class AppComponent {
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
+    
+    this.platform.ready().then(  () => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.backButtonEvent();
       this.backgroundMode.enable();
-      this.askForPermissions()
-      this.notification()
-      this.localNotifications.on('click').subscribe(async (notification) => {
-        let hades = await this.getDataService.randomHades()
+      this.notification();
+      timer(3000).subscribe(() => this.showSplash = false);
+      this.localNotifications.on('click' ).subscribe( async ( notification )=>{
+        let hades =  await this.getDataService.randomHades()
         this.router.navigate(['view-hades', hades])
 
       })
     });
   }
 
+
+  playAudio(){
+    let audio = new Audio();
+    audio.src = "../../assets/نغمة للجوال صلي على محمد ﷺ.mp3";
+    audio.load();
+    audio.play();
+  }
   backButtonEvent() {
     this.backButtonSubscription = this.platform.backButton.subscribe(() => {
       this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
@@ -68,14 +80,15 @@ export class AppComponent {
       err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.FOREGROUND_SERVICE)
     );
   }
-  notification() {
 
+  notification(){
+    this.playAudio();
     this.localNotifications.schedule({
       id: 1,
-      text: "رسول الله يقول لك ...",
-      lockscreen: true,
-      data: {
-        text: "test"
+      text: "قال رسول الله ﷺ ...",
+      lockscreen : true,
+      data : {
+        text : "test"
       },
       trigger: {
         every: ELocalNotificationTriggerUnit.HOUR,
@@ -83,15 +96,14 @@ export class AppComponent {
       },
       actions: []
     });
-
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      header: 'Confirm!',
+      header: 'تاكيد!',
       message: 'هل تريد الخروج',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'رجوع',
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
@@ -110,8 +122,6 @@ export class AppComponent {
   }
 
 
-  // Called when view is left
-  // tslint:disable-next-line:use-lifecycle-interface
   ngOnDestroy() {
     // Unregister the custom back button action for this page
     this.backButtonSubscription.unsubscribe();

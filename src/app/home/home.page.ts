@@ -19,22 +19,12 @@ export class HomePage {
   tempHades: any = [];
   hadeses: any = [];
   hades: any = [];
-  pages = []
-  After_1_hour: any;
-
-
-  oneHourLater = new Date();
+  pages = [];
   
 
   constructor(private admobFree: AdMobFree,public platform: Platform, private router: Router, public storage: GetDataService ,
-    private nativePageTransitions: NativePageTransitions
-    ) {
-
-    // const had = new Singelton();
-    // this.hades = had.saveHades();
-    // this.tempHades = this.hades;
-    
-  }
+    private nativePageTransitions: NativePageTransitions,
+    ) {}
 
 
 ionViewWillEnter() {
@@ -66,9 +56,5 @@ ionViewWillEnter() {
     this.pages = Object.keys(pages)
 
   }
-  ionViewWillLeave() {
-
-
-   
-   }
+  
 }

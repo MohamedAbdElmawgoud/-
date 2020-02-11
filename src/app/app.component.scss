@@ -1,0 +1,268 @@
+// #3F3F3F: #3F3F3F;
+// #F7F2D7: #F7F2D7;
+// #70BBDA: #70BBDA;
+// #D8E7EF: #D8E7EF;
+// #060D15: #060D15;
+// #162533: #162533;
+
+.splash {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+   // display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom , #122539, #0E1F32, #102339, #253F58, #153243, #38415F, #304054, #234962, #123F51)0% 0%/100% 100% no-repeat ;
+}
+
+.middle{
+  width:150px;
+  height:150px;
+  background-color: #D8E7EF;
+  position: relative;
+  left: 120px;
+  top:170px;
+  z-index:1;
+}
+
+.middle:before 
+{
+    content:"";
+    position:absolute;
+    z-index:-1;
+    top:15px;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    border-top:30px solid #060D15;
+}
+
+.middle-windows{
+  position:absolute;
+  width:8px;
+  height:8px;
+  top:20px;
+  left: 10px;
+  border-bottom: 10px #F7F2D7 solid;
+  border-radius:100% 100% 0 0;
+  background-color: #F7F2D7;
+  box-shadow:
+  15px 0px 0 #F7F2D7,
+  30px 0px 0 #F7F2D7,
+  45px 0px 0 #F7F2D7,
+  60px 0px 0 #F7F2D7,
+  75px 0px 0 #F7F2D7,
+  90px 0px 0 #F7F2D7,
+  105px 0px 0 #F7F2D7,
+  120px 0px 0 #F7F2D7,
+  45px 0px 0 #F7F2D7;
+}
+
+
+.middle .dome{
+  position: relative;
+  height:65px;
+  width: 65px;
+  border-bottom: 5px solid #060D15;
+}
+
+.middle .dome-left {
+  top: -70px;
+  left:10px;
+  background-color: #162533;
+}
+
+.middle .dome-right {
+  background-color: #060D15;
+  top: -140px;
+  left:75px;
+  border-radius: 0px 100px 0 0;
+}
+
+.mosque{
+  position: relative;
+  margin:auto;
+  width:390px;
+  height:320px;
+  border-bottom: 55px solid #060D15;
+  
+}
+
+h1 {
+  position: absolute;
+  width:390px;
+  top:310px;
+  z-index:10;
+  text-align: center;
+  color: #FFF5C3!important;
+ // font-family: "Raleway Dots", sans-serif;
+  text-transform: uppercase;
+  font-style: bold;
+  font-size: 40px;
+}
+
+.minaret-left{
+  position:absolute;
+  top: 100px;
+  left:0px;
+  height: 220px;
+  width:20px;
+  background-color: #162533;
+}
+
+.minaret-right{
+  position:absolute;
+  top: 100px;
+  left:370px;
+  height: 220px;
+  width:20px;
+  background-color: #162533;
+}
+
+.minaret-roof{
+position: relative;
+top: -10px;
+width:20px;
+height:10px;
+border-radius:100% 100% 0 0;
+background-color: #060D15;
+}
+
+.balcony{
+  position: relative;
+ // left:-10px;
+  height: 0px;
+  width: 20px;
+  border-top: 15px solid #060D15;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+
+.balcony-top{
+  top:25px;
+}
+
+.balcony-bottom{
+  top:60px;
+}
+
+.minaret-window{
+  position: absolute;
+  top: 8px;
+  left:4px;
+  width:12px;
+  height:6px;
+  border-bottom: 12px #F7F2D7 solid;
+  border-radius:100% 100% 0 0;
+  background-color: #F7F2D7;
+  box-shadow: 0px 50px 0 #F7F2D7,
+  0px 100px 0 #F7F2D7,
+  0px 100px 0 #F7F2D7,
+  0px 130px 0 #F7F2D7;
+}
+
+.small {
+  width:100px;
+  height:100px;
+  position: absolute;
+  background-color: #70BBDA;
+}
+
+.small .door{
+  position: absolute;
+  top:30px;
+  left:25px;
+  width:50px;
+  height:50px;
+  border-radius: 100% 100% 0 0;
+  border-bottom: 20px solid #F7F2D7;
+  background-color: #F7F2D7;
+  box-shadow:
+  0px -5px 0 5px #060D15,
+  125px -5px 0 5px #F7F2D7,
+    125px -10px 0 10px #70BBDA,
+  250px 0px 0 #F7F2D7,
+  250px -5px 0 5px #060D15,;
+  z-index:2;
+}
+
+.small.left{
+  top:220px;
+  left:20px;
+}
+
+.small.right{
+  top:220px;
+  left:270px;
+  z-index:-1;
+}
+
+.small .dome{
+  position: relative;
+  height:40px;
+  width:40px;
+  border-bottom: 10px solid #060D15;
+}
+
+.small .dome-left {
+  top: -50px;
+  left:10px;
+  background-color: #D8E7EF;
+}
+
+.small .dome-right {
+  background-color: #70BBDA;
+  top: -100px;
+  left:50px;
+  border-radius: 0px 100px 0 0;
+}
+
+.dome-left{
+  border-radius: 100px 0 0 0;
+}
+
+.dome-right{
+  border-radius: 0 100px 0 0;
+}
+
+.crescent{
+border-radius: 50%;
+box-shadow: -10px 10px 0 #F7F2D7;
+height: 150px;
+width: 150px;
+  position: absolute;
+  left:220px;
+}
+
+.top{
+  position: absolute;
+  border-left:transparent 5px solid;
+  border-right:transparent 5px solid;
+  border-bottom: 20px solid #D8E7EF;
+}
+
+.minaret-left .top{
+  top:-25px;
+  left:5px;
+}
+
+.small.left .top{
+  top:-65px;
+  left:46px;
+}
+
+.middle .top{
+  top:-85px;
+  left:70px;
+}
+
+.small.right .top{
+  top:-65px;
+  left:46px;
+}
+
+.minaret-right .top{
+  top:-25px;
+  left:5px;
+}
