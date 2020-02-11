@@ -80,7 +80,7 @@ export class AppComponent {
     this.playAudio();
     this.localNotifications.schedule({
       id: 1,
-      text: "رسول الله يقول لك ...",
+      text: "قال رسول الله ﷺ ...",
       lockscreen : true,
       data : {
         text : "test"
@@ -91,7 +91,6 @@ export class AppComponent {
       },
       actions : []
     });
-   
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
@@ -118,8 +117,6 @@ export class AppComponent {
   }
 
 
-  // Called when view is left
-  // tslint:disable-next-line:use-lifecycle-interface
   ngOnDestroy() {
     // Unregister the custom back button action for this page
     this.backButtonSubscription.unsubscribe();

@@ -28,8 +28,6 @@ export class HomePage {
 
 
 ionViewWillEnter() {
-  
-
   if(this.platform.is('cordova')){
   const bannerConfig: AdMobFreeBannerConfig = {
     id :'ca-app-pub-7155090574313106/2425799629' ,
