@@ -37,6 +37,7 @@ export class AppComponent {
     this.platform.ready().then(  () => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.backButtonEvent();
       this.backgroundMode.enable();
       this.notification()
       this.localNotifications.on('click' ).subscribe( async ( notification )=>{
@@ -80,11 +81,11 @@ export class AppComponent {
   }
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      header: 'Confirm!',
+      header: 'تاكيد!',
       message: 'هل تريد الخروج',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'رجوع',
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
