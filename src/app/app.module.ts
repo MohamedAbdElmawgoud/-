@@ -14,7 +14,6 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],  

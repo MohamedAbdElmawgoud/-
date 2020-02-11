@@ -8,13 +8,15 @@ import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { async } from '@angular/core/testing';
 import { GetDataService } from './admin/get-data.service';
-
+import { timer } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
 export class AppComponent {
+  showSplash = true;
+  
   backButtonSubscription:  any;
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
   
@@ -26,20 +28,25 @@ export class AppComponent {
     public alertController: AlertController,
     private localNotifications: LocalNotifications,
     private backgroundMode: BackgroundMode,
-    private getDataService  :GetDataService
+    private getDataService  :GetDataService,
+    
 
     
-  ) {
+  ) 
+  
+  {
     this.initializeApp();
   }
 
   initializeApp() {
+    
     this.platform.ready().then(  () => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.backButtonEvent();
       this.backgroundMode.enable();
-      this.notification()
+      this.notification();
+      timer(3000).subscribe(() => this.showSplash = false);
       this.localNotifications.on('click' ).subscribe( async ( notification )=>{
         let hades =  await this.getDataService.randomHades()
         this.router.navigate(['view-hades', hades])
@@ -48,6 +55,13 @@ export class AppComponent {
     });
   }
 
+
+  playAudio(){
+    let audio = new Audio();
+    audio.src = "../../assets/نغمة للجوال صلي على محمد ﷺ.mp3";
+    audio.load();
+    audio.play();
+  }
   backButtonEvent() {
     this.backButtonSubscription = this.platform.backButton.subscribe(() => {
       this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
@@ -63,7 +77,7 @@ export class AppComponent {
   }
 
   notification(){
-    
+    this.playAudio();
     this.localNotifications.schedule({
       id: 1,
       text: "رسول الله يقول لك ...",

@@ -23,11 +23,13 @@ export class HomePage {
   
 
   constructor(private admobFree: AdMobFree,public platform: Platform, private router: Router, public storage: GetDataService ,
-    private nativePageTransitions: NativePageTransitions
+    private nativePageTransitions: NativePageTransitions,
     ) {}
 
 
 ionViewWillEnter() {
+  
+
   if(this.platform.is('cordova')){
   const bannerConfig: AdMobFreeBannerConfig = {
     id :'ca-app-pub-7155090574313106/2425799629' ,
@@ -56,9 +58,5 @@ ionViewWillEnter() {
     this.pages = Object.keys(pages)
 
   }
-  ionViewWillLeave() {
-
-
-   
-   }
+  
 }
