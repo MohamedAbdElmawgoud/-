@@ -46,7 +46,7 @@ export class AppComponent {
       this.backButtonEvent();
       this.backgroundMode.enable();
       this.notification();
-      timer(3000).subscribe(() => this.showSplash = false);
+      timer(20000).subscribe(() => this.showSplash = false);
       this.localNotifications.on('click' ).subscribe( async ( notification )=>{
         let hades =  await this.getDataService.randomHades()
         this.router.navigate(['view-hades', hades])
